@@ -11,6 +11,11 @@
 
     <artifactId>Task1</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>VertSysMaven</groupId>
+            <artifactId>Task1</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
         <dependency>
             <groupId>commons-net</groupId>
@@ -18,5 +23,6 @@
             <version>2.0</version>
         </dependency>
     </dependencies>
+
 
 </project>

@@ -1,5 +1,3 @@
-package Task1;
-
 import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;
 
@@ -12,7 +10,7 @@ import java.util.Calendar;
 /**
  * Created by marvin on 12.10.17.
  */
-public class Task1 {
+public class Task {
 	/**
 	 * Simple method to compare system with server time via NTP
 	 * @param args no arguments are required
