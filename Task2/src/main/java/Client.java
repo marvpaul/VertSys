@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client extends Thread{
@@ -35,8 +36,35 @@ public class Client extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(in.nextLine());
+
+        String receivedData =in.nextLine();
+        processReceivedData(receivedData);
+
+
         closeConn();
+    }
+
+    public void processReceivedData(String receivedData){
+        if(receivedData.contains("ERROR")) {
+            System.out.println("OOPS, an error occured!");
+            System.out.println(receivedData);
+        } else{
+            ArrayList<String> list = new ArrayList<String>();
+            for (String value : receivedData.split(",")){
+                list.add(value);
+            }
+
+            //TODO: Calculate some values like mean temp and stuff like that
+            //Sth has failed parsing the data
+            if(list.size() != 24){
+                System.out.println("Sth failed parsing the dates");
+            } else{
+                for(int i = 0; i <= 23; i++){
+                    System.out.println(i + "Uhr : " + list.get(i) + "C");
+                }
+            }
+
+        }
     }
 
     public void closeConn(){

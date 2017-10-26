@@ -80,7 +80,6 @@ public class Server extends Thread{
         }
     }
 
-
     public void closeClientCon(){
         try{
             clientSock.close();
