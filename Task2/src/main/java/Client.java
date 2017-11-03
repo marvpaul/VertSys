@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Client{
@@ -87,22 +88,12 @@ public class Client{
      * @return temps list with min, max and mean temperature
      */
     private ArrayList<Float> getMaxMinAndMean(ArrayList<Float> temps){
-        float min = Float.MAX_VALUE;
-        float max = -100000;
-        float mean = 0;
-        for(Float value : temps){
-            if(value < min){
-                min = value;
-            }
-            if(value > max){
-                max = value;
-            }
-            mean += value;
-        }
-        mean /= temps.size();
-        temps.add(min);
-        temps.add(max);
-        temps.add(mean);
+        temps.add(Collections.min(temps));
+        temps.add(Collections.max(temps));
+        temps.add((float)temps.stream()
+                .mapToDouble(value -> value)
+                .average()
+                .orElse(Double.NaN));
         return temps;
     }
 
