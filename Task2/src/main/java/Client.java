@@ -66,7 +66,7 @@ public class Client{
 
             //Sth has failed parsing the data
             if(list.size() != 24){
-                System.err.println("Sth failed parsing the dates. Perhaps the received package is damaged.");
+                System.err.println("ERROR: Sth failed parsing the dates. Perhaps the received package is damaged or dataset on server is inconsistent.");
             } else{
                 //Print out the results, that's all
                 list = getMaxMinAndMean(list);
