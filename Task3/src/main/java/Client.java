@@ -48,7 +48,7 @@ public class Client implements WeatherClient, Serializable{
             } catch (RemoteException e) {
                 System.err.println("Cant get response from weather server :/");
             }
-            System.out.println(response.get(0).get_temperature());
+            System.out.println(response);
             System.out.println("Please enter a new date:");
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();

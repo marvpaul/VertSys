@@ -10,16 +10,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Server extends UnicastRemoteObject implements WeatherServer{
-    ArrayList<WeatherClient> list;
+    private ArrayList<WeatherClient> list;
+    private boolean exit;
+    private ArrayList<MeasurePoint> data;
 
     public Server() throws RemoteException {
         super();
+
+        exit = false;
+        data = new WeatherCSVReader().getWeatherData();
         list = new ArrayList<WeatherClient>();
     }
 
     public List<MeasurePoint> getTemperatures(Date date) throws RemoteException {
+        System.out.println("Get request!");
         ArrayList<MeasurePoint> list = new ArrayList<MeasurePoint>();
-        list.add(new MeasurePoint(new Date(), 10f));
+        for(MeasurePoint measurePoint : data){
+            if(date.getDate() == measurePoint._timeStamp.getDate()){
+               list.add(measurePoint);
+            }
+        }
+        System.out.println("Answer request!");
         return list;
     }
 
@@ -44,28 +55,33 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
             Server server = new Server();
             server.start();
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.err.println("ERROR: Sth is going wrong while creating the server via RMI");
         }
     }
 
     private void start(){
         try{
-
+            //Bind to remote registry
             LocateRegistry.createRegistry(6713);
-            //BInd to remote registry
             Registry registry = LocateRegistry.getRegistry(6713);
             registry.bind("Weather", this);
 
             System.err.println("Server ready");
 
-            System.out.println("To update an entry, please enter sth in following format: YYYY-mm-DD,h,t");
-            System.out.println("F.e. 1997-10-31, 23, -10.0");
-            Scanner sc = new Scanner(System.in);
-            processUserInput(sc.nextLine());
+            loopAskingForInput();
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (AlreadyBoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void loopAskingForInput(){
+        while(!exit){
+            System.out.println("To update an entry, please enter sth in following format: YYYY-mm-DD,h,t");
+            System.out.println("F.e. 1997-10-31, 23, -10.0");
+            Scanner sc = new Scanner(System.in);
+            processUserInput(sc.nextLine());
         }
     }
 
