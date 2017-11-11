@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,8 +29,9 @@ public class WeatherCSVReader {
         //Read each record and search for the value for a given key
         for (CSVRecord record : records) {
             try{
-                //TODO Parse real date here
-                Date measureTime = new Date();
+                String date = record.get("Date");
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date measureTime = df.parse(date);
                 int hour = Integer.parseInt(record.get("Hour"));
                 float temp = parseTemp(record.get("Temp"));
                 System.out.println(measureTime);

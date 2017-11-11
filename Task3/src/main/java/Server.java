@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +28,9 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         System.out.println("Get request!");
         ArrayList<MeasurePoint> list = new ArrayList<MeasurePoint>();
         for(MeasurePoint measurePoint : data){
-            if(date.getDate() == measurePoint._timeStamp.getDate()){
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String measurePointDay = df.format(measurePoint._timeStamp);
+            if(df.format(date).equals(df.format(measurePointDay))){
                list.add(measurePoint);
             }
         }
