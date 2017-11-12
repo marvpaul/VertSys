@@ -25,4 +25,12 @@ public class MeasurePoint implements Serializable{
     public void set_temperature(float _temperature) {
         this._temperature = _temperature;
     }
+
+    @Override
+    public String toString() {
+        return "MeasurePoint{" +
+                "_timeStamp=" + _timeStamp +
+                ", _temperature=" + _temperature +
+                '}';
+    }
 }

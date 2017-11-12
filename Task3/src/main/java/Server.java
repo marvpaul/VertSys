@@ -1,10 +1,10 @@
-import java.io.Serializable;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         for(MeasurePoint measurePoint : data){
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String measurePointDay = df.format(measurePoint._timeStamp);
-            if(df.format(date).equals(df.format(measurePointDay))){
+            if(df.format(date).equals(measurePointDay)){
                list.add(measurePoint);
             }
         }
@@ -90,17 +90,54 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
     }
 
     private void processUserInput(String input){
-        String[] seperated = input.split(",");
-        if(seperated.length == 3){
-            MeasurePoint point = new MeasurePoint(new Date(), 100f);
+        MeasurePoint mp = parseMeasurePointFromUserInput(input);
+        if(saveUpdate(mp)){
             try {
-                this.updateClients(point);
+                this.updateClients(mp);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         } else{
-            System.err.println("Invalid input");
+            System.err.println("ERROR: The entered date is not inside the weather servers database. Please enter an existing date");
         }
+    }
+
+    private boolean saveUpdate(MeasurePoint mp){
+        for(int i = 0; i < data.size(); i++){
+            if(data.get(i)._timeStamp.compareTo(mp._timeStamp) == 0){
+                data.set(i, mp);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private MeasurePoint parseMeasurePointFromUserInput(String input){
+        try {
+            String[] seperated = input.split(",");
+            if (seperated.length == 3) {
+
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date measurePointDay = df.parse(seperated[0]);
+
+                int hour = Integer.parseInt(seperated[1]);
+
+                Date measureTime = new Date();
+
+                measureTime.setTime(measurePointDay.getTime() + hour * 60 * 60 * 1000);
+
+                float temp = Float.parseFloat(seperated[2]);
+
+                MeasurePoint point = new MeasurePoint(measureTime, temp);
+
+                return point;
+
+            }
+        } catch (Exception e) {
+            System.err.println("ERROR: Failed while parsing ...");
+        }
+
+        return null;
     }
 
     private void updateClients(MeasurePoint point) throws RemoteException {
