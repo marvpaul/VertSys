@@ -4,18 +4,24 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The implementation of a WeatherServer
+ */
 public class Server extends UnicastRemoteObject implements WeatherServer{
     private ArrayList<WeatherClient> list;
     private boolean exit;
     private ArrayList<MeasurePoint> data;
 
+    /**
+     * The constructor for the Server
+     * @throws RemoteException
+     */
     public Server() throws RemoteException {
         super();
 
@@ -24,6 +30,12 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         list = new ArrayList<WeatherClient>();
     }
 
+    /**
+     * This method is called from the Client RMI in case of a request
+     * @param date a Date
+     * @return all MeasurePoints at date date stored in a list
+     * @throws RemoteException
+     */
     public List<MeasurePoint> getTemperatures(Date date) throws RemoteException {
         System.out.println("Get request!");
         ArrayList<MeasurePoint> list = new ArrayList<MeasurePoint>();
@@ -38,6 +50,12 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         return list;
     }
 
+    /**
+     * Register a client
+     * @param client the certain client
+     * @return true if registration was successful
+     * @throws RemoteException
+     */
     public boolean register(WeatherClient client) throws RemoteException {
         if(list.add(client)){
             System.out.println("Client joined");
@@ -46,6 +64,12 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         return false;
     }
 
+    /**
+     * Deresgister a client
+     * @param client the certain client
+     * @return true if deregistration das successful
+     * @throws RemoteException
+     */
     public boolean deregister(WeatherClient client) throws RemoteException {
         if(list.remove(client)){
             System.out.println("Client left");
@@ -80,6 +104,9 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         }
     }
 
+    /**
+     * A loop in which the server asks for input to update a MeasurePoint
+     */
     private void loopAskingForInput(){
         while(!exit){
             System.out.println("To update an entry, please enter sth in following format: YYYY-mm-DD,h,t");
@@ -89,6 +116,10 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         }
     }
 
+    /**
+     * In case the user want to update a MeasurePoint, this method try to process the input
+     * @param input the user input from console
+     */
     private void processUserInput(String input){
         MeasurePoint mp = parseMeasurePointFromUserInput(input);
         if(saveUpdate(mp)){
@@ -102,6 +133,11 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         }
     }
 
+    /**
+     * Save a Updated MeasurePoint
+     * @param mp the updated MeasurePoint
+     * @return true in case the MeasurePoint existed and update was successful
+     */
     private boolean saveUpdate(MeasurePoint mp){
         for(int i = 0; i < data.size(); i++){
             if(data.get(i)._timeStamp.compareTo(mp._timeStamp) == 0){
@@ -112,6 +148,11 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         return false;
     }
 
+    /**
+     * Parse MeasurePoint from user input
+     * @param input the given input
+     * @return A MeasurePoint or null
+     */
     private MeasurePoint parseMeasurePointFromUserInput(String input){
         try {
             String[] seperated = input.split(",");
@@ -140,6 +181,11 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         return null;
     }
 
+    /**
+     * This method is called in case of an MeasurePoint update. All clients will be notified :)
+     * @param point the newly updated MeasurePoint
+     * @throws RemoteException
+     */
     private void updateClients(MeasurePoint point) throws RemoteException {
         for (int i = 0; i < list.size(); i++) {
             list.get(i).updateTemperature(point);

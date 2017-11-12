@@ -5,14 +5,20 @@ import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Client implements WeatherClient{
+
     private WeatherClient cl;
     private WeatherServer stub;
 
+    /**
+     * This method is called from the server via RMI each time a Measurepoint was updated
+     * In this case the client asks for the hole data on this day and print the data via printReceiveUpdate()
+     * @param point the recently updated MeasurePOint
+     * @throws RemoteException in case sth during server client communication failed
+     */
     public void updateTemperature(MeasurePoint point) throws RemoteException {
         System.out.println("Received an update: ");
         List<MeasurePoint> points = stub.getTemperatures(point._timeStamp);
@@ -24,12 +30,17 @@ public class Client implements WeatherClient{
         client.start();
     }
 
+
     public void start(){
         stub = registerByWeatherServer();
 
         processInput();
     }
 
+    /**
+     * Registers the client at the WeatherServer
+     * @return the remove WeatherServer object
+     */
     private WeatherServer registerByWeatherServer(){
         WeatherServer stub = null;
         try{
@@ -43,6 +54,10 @@ public class Client implements WeatherClient{
         return stub;
     }
 
+    /**
+     * Process the UserInput
+     * The user can enter a date and the client will ask the server for data at this date
+     */
     private void processInput(){
         Scanner sc = new Scanner(System.in);
 
@@ -52,13 +67,24 @@ public class Client implements WeatherClient{
 
             handleExit(input);
 
-            List<MeasurePoint> response = sendWeatherDataRequest(input);
-
-            printReceivedData(response, null);
-
+            processRequest(input);
         }
     }
 
+    /**
+     * Make a request and asking for WeatherData at a given date
+     * @param input the date as a string
+     */
+    private void processRequest(String input){
+        List<MeasurePoint> response = sendWeatherDataRequest(input);
+
+        printReceivedData(response, null);
+    }
+
+    /**
+     * In case the user enters exit, the client tries to shutdown
+     * @param input
+     */
     private void handleExit(String input){
         if(input.equals("exit")){
             try {
@@ -71,6 +97,11 @@ public class Client implements WeatherClient{
         }
     }
 
+    /**
+     * The client parse the inputDate and send a request with a date to the server
+     * @param inputDate the date as a string
+     * @return in best case a list of MeasurePoints. In case the server sends null, this method also just returns null
+     */
     private List<MeasurePoint> sendWeatherDataRequest(String inputDate){
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -84,6 +115,12 @@ public class Client implements WeatherClient{
         return null;
     }
 
+    /**
+     * The print method for MeasurePoints
+     * @param list list with MeasurePoints
+     * @param update a single MeasurePoint which was updated by the server. In case this param is not null,
+     *               the MeasurePoint will be highlighted in console
+     */
     private void printReceivedData(List<MeasurePoint> list, MeasurePoint update){
         if(list.size() == 0){
             System.err.println("ERROR: No data received. Perhaps you have entered a invalid date. Date has to be in following format: yyyy-MM-dd");

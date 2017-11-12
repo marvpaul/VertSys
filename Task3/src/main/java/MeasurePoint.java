@@ -28,9 +28,7 @@ public class MeasurePoint implements Serializable{
 
     @Override
     public String toString() {
-        return "MeasurePoint{" +
-                "_timeStamp=" + _timeStamp +
-                ", _temperature=" + _temperature +
-                '}';
+        return  "Date: " + _timeStamp +
+                ", Temperature: " + _temperature;
     }
 }
