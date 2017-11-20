@@ -54,7 +54,6 @@ public class WeatherCSVReader {
         Date measureTime = df.parse(date);
         int hour = Integer.parseInt(record.get("Hour"));
         float temp = parseTemp(record.get("Temp"));
-        System.out.println(measureTime);
         measureTime.setTime(measureTime.getTime() + hour * 60 * 60 * 1000);
         return new MeasurePoint(measureTime, temp);
     }

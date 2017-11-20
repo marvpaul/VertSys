@@ -122,6 +122,7 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
      */
     private void processUserInput(String input){
         MeasurePoint mp = parseMeasurePointFromUserInput(input);
+        System.out.println(mp);
         if(saveUpdate(mp)){
             try {
                 this.updateClients(mp);
@@ -155,6 +156,7 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
      */
     private MeasurePoint parseMeasurePointFromUserInput(String input){
         try {
+            input = input.replaceAll(" ","");
             String[] seperated = input.split(",");
             if (seperated.length == 3) {
 
@@ -192,3 +194,4 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         }
     }
 }
+//TODO: In case enetering a false date, there is an error
