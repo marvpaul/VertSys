@@ -194,4 +194,3 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         }
     }
 }
-//TODO: In case enetering a false date, there is an error

@@ -5,6 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -130,7 +132,32 @@ public class Client implements WeatherClient{
                     System.out.println("***" + update + "***");
                 }
                 System.out.println(mp);
+
             }
+            ArrayList<Float> minMaxMean = getMaxMinAndMean(list);
+            System.out.println("Min: " + minMaxMean.get(0));
+            System.out.println("Max: " + minMaxMean.get(1));
+            System.out.println("Mean: " + minMaxMean.get(2));
         }
+    }
+
+    /**
+     * Calculate the min, max and mean temperature for some given temperatures and add them to the end
+     * of the existing temps list
+     * @param temps list with all temperature
+     * @return temps list with min, max and mean temperature
+     */
+    private ArrayList<Float> getMaxMinAndMean(List<MeasurePoint> mps){
+        ArrayList<Float> temps = new ArrayList<Float>();
+        for(int i = 0; i < mps.size(); i++){
+            temps.add(mps.get(i).get_temperature());
+        }
+        temps.add(Collections.min(temps));
+        temps.add(Collections.max(temps));
+        temps.add((float)temps.stream()
+                .mapToDouble(value -> value)
+                .average()
+                .orElse(Double.NaN));
+        return temps;
     }
 }
