@@ -11,6 +11,7 @@ public class Client implements WeatherClient{
 
     private WeatherClient cl;
     private WeatherServer stub;
+    private List<MeasurePoint> points;
 
     /**
      * This method is called from the server via RMI each time a Measurepoint was updated
@@ -20,8 +21,8 @@ public class Client implements WeatherClient{
      */
     public void updateTemperature(MeasurePoint point) throws RemoteException {
         System.out.println("Received an update: ");
-        List<MeasurePoint> points = stub.getTemperatures(point._timeStamp);
-        printReceivedData(points, point);
+        points = stub.getTemperatures(point._timeStamp);
+        printReceivedData(point);
     }
 
     public static void main(String[] args) {
@@ -75,10 +76,9 @@ public class Client implements WeatherClient{
      * @param input the date as a string
      */
     private void processRequest(String input){
-        List<MeasurePoint> response = sendWeatherDataRequest(input);
-
-        if(response != null){
-            printReceivedData(response, null);
+        points = sendWeatherDataRequest(input);
+        if(points != null){
+            printReceivedData(null);
         }
     }
 
@@ -124,45 +124,39 @@ public class Client implements WeatherClient{
 
     /**
      * The print method for MeasurePoints
-     * @param list list with MeasurePoints
      * @param update a single MeasurePoint which was updated by the server. In case this param is not null,
      *               the MeasurePoint will be highlighted in console
      */
-    private void printReceivedData(List<MeasurePoint> list, MeasurePoint update){
-        if(list == null  || list.size() == 0){
+    private void printReceivedData(MeasurePoint update){
+        if(points == null  || points.size() == 0){
             System.err.println("ERROR: No data received. Perhaps there are no existing measurepoints for your requested date?");
         } else{
-            for (MeasurePoint mp : list){
+            for (MeasurePoint mp : points){
                 if(update != null && mp._timeStamp.compareTo(update._timeStamp) == 0){
                     System.out.println("***" + update + "***");
                 }
                 System.out.println(mp);
 
             }
-            ArrayList<Float> minMaxMean = getMaxMinAndMean(list);
-            System.out.println("Min: " + minMaxMean.get(0));
-            System.out.println("Max: " + minMaxMean.get(1));
-            System.out.println("Mean: " + minMaxMean.get(2));
+            ArrayList<Float> floatList = getFloatList();
+            System.out.println("Min: " + Collections.min(floatList));
+            System.out.println("Max: " + Collections.max(floatList));
+            System.out.println("Mean: " + (float)floatList.stream()
+                    .mapToDouble(value -> value)
+                    .average()
+                    .orElse(Double.NaN));
         }
     }
 
     /**
-     * Calculate the min, max and mean temperature for some given temperatures and add them to the end
-     * of the existing temps list
-     * @param temps list with all temperature
-     * @return temps list with min, max and mean temperature
+     * Make a float arraylist from the MeasurePoint arraylist
+     * @return float list with all temperatures
      */
-    private ArrayList<Float> getMaxMinAndMean(List<MeasurePoint> mps){
+    private ArrayList<Float> getFloatList(){
         ArrayList<Float> temps = new ArrayList<Float>();
-        for(int i = 0; i < mps.size(); i++){
-            temps.add(mps.get(i).get_temperature());
+        for(int i = 0; i < points.size(); i++){
+            temps.add(points.get(i).get_temperature());
         }
-        temps.add(Collections.min(temps));
-        temps.add(Collections.max(temps));
-        temps.add((float)temps.stream()
-                .mapToDouble(value -> value)
-                .average()
-                .orElse(Double.NaN));
         return temps;
     }
 }
