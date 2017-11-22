@@ -5,10 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Client implements WeatherClient{
 
@@ -80,7 +77,9 @@ public class Client implements WeatherClient{
     private void processRequest(String input){
         List<MeasurePoint> response = sendWeatherDataRequest(input);
 
-        printReceivedData(response, null);
+        if(response != null){
+            printReceivedData(response, null);
+        }
     }
 
     /**
@@ -105,13 +104,19 @@ public class Client implements WeatherClient{
      * @return in best case a list of MeasurePoints. In case the server sends null, this method also just returns null
      */
     private List<MeasurePoint> sendWeatherDataRequest(String inputDate){
+        Date date = null;
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            return stub.getTemperatures(df.parse(inputDate));
-        } catch (RemoteException e) {
-            System.err.println("Cant get response from weather server :/");
-        } catch (ParseException e) {
+            date = df.parse(inputDate);
+        }  catch (ParseException e) {
             System.err.println("ERROR: Client cannot parse date. Please enter in following format: yyyy-MM-dd");
+        }
+        if(date != null){
+            try{
+                return stub.getTemperatures(date);
+            } catch (RemoteException e) {
+                System.err.println("ERROR: Cant get response from weather server :/");
+            }
         }
         //Just in case :)
         return null;
@@ -124,8 +129,8 @@ public class Client implements WeatherClient{
      *               the MeasurePoint will be highlighted in console
      */
     private void printReceivedData(List<MeasurePoint> list, MeasurePoint update){
-        if(list.size() == 0){
-            System.err.println("ERROR: No data received. Perhaps you have entered a invalid date. Date has to be in following format: yyyy-MM-dd");
+        if(list == null  || list.size() == 0){
+            System.err.println("ERROR: No data received. Perhaps there are no existing measurepoints for your requested date?");
         } else{
             for (MeasurePoint mp : list){
                 if(update != null && mp._timeStamp.compareTo(update._timeStamp) == 0){

@@ -122,15 +122,17 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
      */
     private void processUserInput(String input){
         MeasurePoint mp = parseMeasurePointFromUserInput(input);
-        System.out.println(mp);
-        if(saveUpdate(mp)){
-            try {
-                this.updateClients(mp);
-            } catch (RemoteException e) {
-                e.printStackTrace();
+        if(mp != null) {
+            System.out.println(mp);
+            if (saveUpdate(mp)) {
+                try {
+                    this.updateClients(mp);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.err.println("ERROR: The entered date is not inside the weather servers database. Please enter an existing date");
             }
-        } else{
-            System.err.println("ERROR: The entered date is not inside the weather servers database. Please enter an existing date");
         }
     }
 
@@ -179,7 +181,7 @@ public class Server extends UnicastRemoteObject implements WeatherServer{
         } catch (Exception e) {
             System.err.println("ERROR: Failed while parsing ...");
         }
-
+        System.err.println("ERROR: Failed while parsing ...");
         return null;
     }
 
