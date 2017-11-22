@@ -134,30 +134,27 @@ public class Client implements WeatherClient{
                 System.out.println(mp);
 
             }
-            ArrayList<Float> minMaxMean = getMaxMinAndMean(list);
-            System.out.println("Min: " + minMaxMean.get(0));
-            System.out.println("Max: " + minMaxMean.get(1));
-            System.out.println("Mean: " + minMaxMean.get(2));
+            ArrayList<Float> floatList = getFloatList(list);
+            System.out.println("Min: " + Collections.min(floatList));
+            System.out.println("Max: " + Collections.max(floatList));
+            System.out.println("Mean: " + (float)floatList.stream()
+                    .mapToDouble(value -> value)
+                    .average()
+                    .orElse(Double.NaN));
         }
     }
 
     /**
-     * Calculate the min, max and mean temperature for some given temperatures and add them to the end
-     * of the existing temps list
-     * @param temps list with all temperature
-     * @return temps list with min, max and mean temperature
+     * Make a float arraylist from the MeasurePoint arraylist
+     *
+     * @param mps list with all temperature
+     * @return float list with all temperatures
      */
-    private ArrayList<Float> getMaxMinAndMean(List<MeasurePoint> mps){
+    private ArrayList<Float> getFloatList(List<MeasurePoint> mps){
         ArrayList<Float> temps = new ArrayList<Float>();
         for(int i = 0; i < mps.size(); i++){
             temps.add(mps.get(i).get_temperature());
         }
-        temps.add(Collections.min(temps));
-        temps.add(Collections.max(temps));
-        temps.add((float)temps.stream()
-                .mapToDouble(value -> value)
-                .average()
-                .orElse(Double.NaN));
         return temps;
     }
 }
