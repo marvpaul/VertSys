@@ -15,8 +15,8 @@ public class MySocketServer implements Runnable{
     }
 
     public void run() {
-        long threadId = Thread.currentThread().getId();
-        log.info("Thread # " + threadId + " is doing this task");
+        long pid = ProcessHandle.current().pid();
+        log.info("Thread with pid: " + pid + " is doing this task");
         processReq();
     }
 
