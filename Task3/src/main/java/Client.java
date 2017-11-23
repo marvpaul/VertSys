@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -134,9 +135,9 @@ public class Client implements WeatherClient{
             for (MeasurePoint mp : points){
                 if(update != null && mp._timeStamp.compareTo(update._timeStamp) == 0){
                     System.out.println("***" + update + "***");
+                } else{
+                    System.out.println(mp);
                 }
-                System.out.println(mp);
-
             }
             ArrayList<Float> floatList = getFloatList();
             System.out.println("Min: " + Collections.min(floatList));
