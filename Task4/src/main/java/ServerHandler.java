@@ -1,12 +1,12 @@
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.ArrayList;
 
 public class ServerHandler {
     int port;
     ServerSocket sock;
-    Socket clientSock;
     boolean exit;
+    private ArrayList<MeasurePoint> data;
 
     /**
      * Constructor for server
@@ -17,19 +17,35 @@ public class ServerHandler {
      */
     public ServerHandler(int port) {
         exit = false;
-
         this.port = port;
+
+        createServerSock();
+
+        getWeatherData();
+
+        System.out.println("Server started");
+
+        processRequests();
+
+    }
+
+    private void createServerSock(){
         try {
             sock = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Server started");
+    }
 
+    private void getWeatherData(){
+        WeatherCSVReader reader = new WeatherCSVReader();
+        data = reader.getWeatherData();
+    }
+
+    private void processRequests(){
         try {
             while(!exit){
-
-                MySocketServer s = new MySocketServer(sock.accept());
+                MySocketServer s = new MySocketServer(sock.accept(), data);
                 Thread t = new Thread(s);
                 t.start();
             }

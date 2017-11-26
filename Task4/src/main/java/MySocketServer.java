@@ -1,22 +1,25 @@
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
-
 import java.io.*;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MySocketServer implements Runnable{
-
-    private static final Logger log = Logger.getLogger( MySocketServer.class.getName() );
+    private ArrayList<MeasurePoint> data;
+    private static final Logger LOGGER = Logger.getLogger( MySocketServer.class.getName() );
 
     private Socket clientSock;
-    public MySocketServer(Socket sock) {
+    public MySocketServer(Socket sock, ArrayList<MeasurePoint> data) {
+        LOGGER.setLevel(Level.INFO);
+        this.data = data;
         this.clientSock = sock;
     }
 
     public void run() {
-        long pid = ProcessHandle.current().pid();
-        log.info("Thread with pid: " + pid + " is doing this task");
+        long threadId = Thread.currentThread().getId();
+        LOGGER.info("Thread # " + threadId + " is doing this task");
         processReq();
     }
 
@@ -28,7 +31,7 @@ public class MySocketServer implements Runnable{
         //Using auto cloable for reader ;)
         try( BufferedReader reader = new BufferedReader(new InputStreamReader(clientSock.getInputStream()))){
             String mess = reader.readLine();
-            String returnMess = getData(mess);
+            String returnMess = getWeatherDataForCertainDate(mess);
 
             PrintWriter writer = new PrintWriter(clientSock.getOutputStream());
             writer.println(returnMess);
@@ -47,34 +50,22 @@ public class MySocketServer implements Runnable{
      * @param key a date, format: "YYYY-MM-dd"
      * @return A list of temperatures, sorted from 0 - 23, seperated by ,
      */
-    public String getData(String key){
-        //Source: https://commons.apache.org/proper/commons-csv/user-guide.html
+    public String getWeatherDataForCertainDate(String key){
         try {
-            //Load weather data
-            System.out.println(this.getClass().getClassLoader().getResource("").getPath());
-            InputStream inStream = this.getClass().getClassLoader().getResourceAsStream("weather.csv");
-            Reader in = new InputStreamReader(inStream);
-            //First row is header
-            Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
-
-            String values = "";
-
-            //Read each record and search for the value for a given key
-            for (CSVRecord record : records) {
-                try{
-                    values += record.get(key) + ",";
-                }
-                catch (Exception e){
-                    return "ERROR: Invalid date, please enter a date with format: YYYY-mm-dd";
+            String temperatureList = "";
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            for(MeasurePoint measurePoint : data){
+                String measurePointDay = df.format(measurePoint._timeStamp);
+                if(measurePointDay.equals(key)){
+                    temperatureList += measurePoint.get_temperature() + ", ";
                 }
             }
-
-            //Clonse streams :)
-            inStream.close();
-            in.close();
-
-            //Just remove the last seperator and return the list
-            return values.substring(0, values.length() - 1);
+            if(temperatureList != ""){
+                //Just remove the last seperator and return the list
+                return temperatureList.substring(0, temperatureList.length() - 1);
+            } else{
+                return "ERROR: Failed to loading data from server!";
+            }
         } catch (Exception e) {
             return "ERROR: Failed to loading data from server!";
         }
