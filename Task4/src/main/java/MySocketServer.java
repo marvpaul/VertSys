@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 public class MySocketServer implements Runnable{
     private ArrayList<MeasurePoint> data;
     private static final Logger LOGGER = Logger.getLogger( MySocketServer.class.getName() );
+    private static volatile int requests = 0;
 
     private Socket clientSock;
     public MySocketServer(Socket sock, ArrayList<MeasurePoint> data) {
@@ -18,6 +19,8 @@ public class MySocketServer implements Runnable{
     }
 
     public void run() {
+        MySocketServer.requests++;
+        while (requests  < 2) { }
         long threadId = Thread.currentThread().getId();
         LOGGER.info("Thread # " + threadId + " is doing this task");
         processReq();

@@ -8,6 +8,7 @@ public class ServerHandler {
     boolean exit;
     private ArrayList<MeasurePoint> data;
 
+
     /**
      * Constructor for server
      * Initialize a ServerSocket and bind to a given port.
