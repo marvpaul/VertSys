@@ -3,6 +3,8 @@ import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +16,12 @@ public class MySocketServer implements Runnable{
     private Socket clientSock;
     public MySocketServer(Socket sock, ArrayList<MeasurePoint> data) {
         LOGGER.setLevel(Level.INFO);
+        try {
+            Handler logHandler =  new FileHandler("log.txt");
+            LOGGER.addHandler(logHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.data = data;
         this.clientSock = sock;
     }
