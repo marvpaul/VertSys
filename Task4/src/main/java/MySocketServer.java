@@ -20,7 +20,7 @@ public class MySocketServer implements Runnable{
 
     public void run() {
         MySocketServer.requests++;
-        while (requests  < 1) { }
+        while (requests  < 2) { }
         long threadId = Thread.currentThread().getId();
         LOGGER.info("Thread # " + threadId + " is doing this task" + "\nIP Address: " + clientSock.getInetAddress()
                 + "\nPort: " +clientSock.getPort());
