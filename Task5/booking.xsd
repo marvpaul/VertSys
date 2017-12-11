@@ -1,58 +1,58 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:element name="bookings" type="bookings" />
-    
-<!-- Bookings -->
-<xs:complexType name="bookings">
-    <xs:sequence>
-        <xs:element name="booking" type="booking" maxOccurs="unbounded"/>
-    </xs:sequence>
-</xs:complexType>
-    
-<!-- Booking-->
-<xs:complexType name="booking">
-    <xs:sequence>
-        <xs:element name="flights" type="flights"/>
-        <xs:element name="price" type="xs:float"/>
-    </xs:sequence>
-    <xs:attribute name="booking_nr" type="xs:integer" use="required"/>
-</xs:complexType>
 
-<!--Flights-->
-<xs:complexType name="flights">
-    <xs:sequence>
-        <xs:element name="flight" type="flight" maxOccurs="unbounded"/>
-    </xs:sequence>
-</xs:complexType>
+    <!-- Bookings -->
+    <xs:complexType name="bookings">
+        <xs:sequence>
+            <xs:element name="booking" type="booking" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
-<!--Flight-->
-<xs:complexType name="flight">
-    <xs:sequence>
-        <xs:element name="departure" type="xs:string"/>
-        <xs:element name="destination" type="xs:string"/>
-        <xs:element name="departure_date" type="xs:date"/>
-        <xs:element name="destination_date" type="xs:date"/>
-        <xs:element name="departure_time" type="xs:time"/>
-        <xs:element name="destination_time" type="xs:time"/>
-        <xs:element name="is_secure_flight" type="xs:boolean"/>
-        <xs:element name="passengers" type="passengers"/>
-    </xs:sequence>
-    <xs:attribute name="flight_nr" type="xs:integer" use="required"/>
-</xs:complexType>
-    
-<!-- Passengers -->
-<xs:complexType name="passengers">
-    <xs:sequence>
-        <xs:element name="passenger" type="passenger" maxOccurs="unbounded"/>
-    </xs:sequence>
-</xs:complexType>
+    <!-- Booking-->
+    <xs:complexType name="booking">
+        <xs:sequence>
+            <xs:element name="flights" type="flights"/>
+            <xs:element name="price" type="xs:float"/>
+        </xs:sequence>
+        <xs:attribute name="booking_nr" type="xs:integer" use="required"/>
+    </xs:complexType>
 
-<!-- Passenger-->
-<xs:complexType name="passenger">
-    <xs:sequence>
-        <xs:element name="adress" type="xs:string"/>
-        <xs:element name="children" type="xs:integer"/>
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-</xs:complexType>
+    <!--Flights-->
+    <xs:complexType name="flights">
+        <xs:sequence>
+            <xs:element name="flight" type="flight" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--Flight-->
+    <xs:complexType name="flight">
+        <xs:sequence>
+            <xs:element name="departure" type="xs:string"/>
+            <xs:element name="destination" type="xs:string"/>
+            <xs:element name="departure_date" type="xs:date"/>
+            <xs:element name="destination_date" type="xs:date"/>
+            <xs:element name="departure_time" type="xs:time"/>
+            <xs:element name="destination_time" type="xs:time"/>
+            <xs:element name="is_secure_flight" type="xs:boolean"/>
+            <xs:element name="passengers" type="passengers"/>
+        </xs:sequence>
+        <xs:attribute name="flight_nr" type="xs:integer" use="required"/>
+    </xs:complexType>
+
+    <!-- Passengers -->
+    <xs:complexType name="passengers">
+        <xs:sequence>
+            <xs:element name="passenger" type="passenger" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Passenger-->
+    <xs:complexType name="passenger">
+        <xs:sequence>
+            <xs:element name="adress" type="xs:string"/>
+            <xs:element name="children" type="xs:integer"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
 </xs:schema>
