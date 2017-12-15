@@ -1,5 +1,4 @@
 import generated.Bookings;
-import jdk.internal.org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -7,7 +6,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class XMLUnmarshalling {
-    public static void main( String[] args ) throws JAXBException, SAXException
+    public static void main( String[] args ) throws JAXBException
     {
         try {
 
