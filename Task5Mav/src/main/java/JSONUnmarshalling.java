@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import generated.BookingsJackson;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,7 +9,15 @@ import java.util.Map;
 public class JSONUnmarshalling {
     public static void main(String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+
         String content = new JSONUnmarshalling().load();
+        //JSON from file to Object
+        BookingsJackson obj = objectMapper.readValue(content, BookingsJackson.class);
+        for(int i = 0; i < obj.bookings.length; i++){
+            System.out.println(obj.bookings[i]);
+        }
+
+        /*
         Map<String, Object> map = objectMapper.readValue(content, new TypeReference<Map<String,Object>>(){});
 
         for (Map.Entry<String, Object> entry : map.entrySet())
@@ -18,6 +27,9 @@ public class JSONUnmarshalling {
                 System.out.println("Booking" + list.get(i));
             }
         }
+        String jsonInString = "{'name' : 'mkyong'}";*/
+
+
     }
 
     public String load() throws FileNotFoundException {
