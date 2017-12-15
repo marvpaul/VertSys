@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookings>
+
+    <booking orderPerson="John Smith" bookingId="88556-73979">
+        <passengers>
+            <lastName>Nordmann</lastName>
+            <firstName>Olga</firstName>
+            <address>Langgt 23</address>
+            <postCode>12345</postCode>
+            <city>Kopenhagen</city>
+            <country>Dansk</country>
+        </passengers>
+        <passengers>
+            <lastName>Suedfrau</lastName>
+            <firstName>Horst</firstName>
+            <address>Langgt 23</address>
+            <postCode>12345</postCode>
+            <city>Kopenhagen</city>
+            <country>Dansk</country>
+        </passengers>
+        <flights flightNumber="3V1000">
+            <departureLocation>TXL</departureLocation>
+            <departureDate>2017-12-20</departureDate>
+            <departureTime>15:00:00</departureTime>
+            <destinationLocation>LAX</destinationLocation>
+            <destinationDate>2017-12-21</destinationDate>
+            <destinationTime>10:00:00</destinationTime>
+            <class>Economy</class>
+            <isSecureFlight>true</isSecureFlight>
+        </flights>
+        <flights flightNumber="3H1001">
+            <departureLocation>LAX</departureLocation>
+            <departureDate>2017-12-21</departureDate>
+            <departureTime>11:00:00</departureTime>
+            <destinationLocation>OGG</destinationLocation>
+            <destinationDate>2017-12-21</destinationDate>
+            <destinationTime>18:00:00</destinationTime>
+            <class>First</class>
+            <isSecureFlight>false</isSecureFlight>
+        </flights>
+        <price>
+            <amount>1300.0</amount>
+            <currency>USD</currency>
+        </price>
+    </booking>
+
+
+    <booking orderPerson="Jane Doe" bookingId="12345-67890">
+        <passengers>
+            <lastName>Doe</lastName>
+            <firstName>Jane</firstName>
+            <address>Queen Lane 43b</address>
+            <postCode>55567</postCode>
+            <city>London</city>
+            <country>England</country>
+        </passengers>
+        <flights flightNumber="4P9999">
+            <departureLocation>FRA</departureLocation>
+            <departureDate>2018-04-01</departureDate>
+            <departureTime>11:11:11</departureTime>
+            <destinationLocation>NYC</destinationLocation>
+            <destinationDate>2018-04-01</destinationDate>
+            <destinationTime>17:11:11</destinationTime>
+            <class>First</class>
+            <isSecureFlight>true</isSecureFlight>
+        </flights>
+        <price>
+            <amount>999</amount>
+            <currency>EUR</currency>
+        </price>
+    </booking>
+
+    <booking orderPerson="Otto Waalkes" bookingId="67890-12345">
+        <passengers>
+            <lastName>Ottifant</lastName>
+            <firstName>Der kleine</firstName>
+            <address>Hauptstr.12</address>
+            <postCode>44456</postCode>
+            <city>Leer</city>
+            <country>Ostfriesland</country>
+        </passengers>
+        <flights flightNumber="4P4567">
+            <departureLocation>HAM</departureLocation>
+            <departureDate>2018-05-01</departureDate>
+            <departureTime>12:15:00</departureTime>
+            <destinationLocation>AGA</destinationLocation>
+            <destinationDate>2018-05-02</destinationDate>
+            <destinationTime>17:15:00</destinationTime>
+            <class>Business</class>
+            <isSecureFlight>false</isSecureFlight>
+        </flights>
+        <price>
+            <amount>899.99</amount>
+            <currency>EUR</currency>
+        </price>
+    </booking>
+
+    <booking orderPerson="Louis de Funès" bookingId="67890-33445">
+        <passengers>
+            <lastName>de Funès</lastName>
+            <firstName>Louis</firstName>
+            <address>Rue de Baguette 12</address>
+            <postCode>44456</postCode>
+            <city>Paris</city>
+            <country>France</country>
+        </passengers>
+        <flights flightNumber="4P4599">
+            <departureLocation>ORY</departureLocation>
+            <departureDate>2018-06-01</departureDate>
+            <departureTime>09:15:00</departureTime>
+            <destinationLocation>NRT</destinationLocation>
+            <destinationDate>2018-06-02</destinationDate>
+            <destinationTime>18:15:00</destinationTime>
+            <class>First</class>
+            <isSecureFlight>false</isSecureFlight>
+        </flights>
+        <price>
+            <amount>1299.99</amount>
+            <currency>EUR</currency>
+        </price>
+    </booking>
+
+    <booking orderPerson="Ephraim Kishon" bookingId="67890-33557">
+        <passengers>
+            <lastName>Kishon</lastName>
+            <firstName>Ephraim</firstName>
+            <address>Rothschild Boulevard 44</address>
+            <postCode>1001</postCode>
+            <city>Tel Aviv</city>
+            <country>Israel</country>
+        </passengers>
+        <flights flightNumber="LY0699">
+            <departureLocation>TLV</departureLocation>
+            <departureDate>2018-09-01</departureDate>
+            <departureTime>10:15:00</departureTime>
+            <destinationLocation>BUD</destinationLocation>
+            <destinationDate>2018-09-01</destinationDate>
+            <destinationTime>13:50:00</destinationTime>
+            <class>Business</class>
+            <isSecureFlight>true</isSecureFlight>
+        </flights>
+        <price>
+            <amount>299.99</amount>
+            <currency>USD</currency>
+        </price>
+    </booking>
+
+</bookings>

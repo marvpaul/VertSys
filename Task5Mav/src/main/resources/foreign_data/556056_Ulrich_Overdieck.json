@@ -1,0 +1,188 @@
+{
+  "bookings": [
+    {
+      "-orderPerson": "John Smith",
+      "-bookingId": "88556-73979",
+      "passengers": [
+        {
+          "lastName": "Nordmann",
+          "firstName": "Olga",
+          "address": "Langgt 23",
+          "postCode": "12345",
+          "city": "Kopenhagen",
+          "country": "Dansk"
+        },
+        {
+          "lastName": "Suedfrau",
+          "firstName": "Horst",
+          "address": "Langgt 23",
+          "postCode": "12345",
+          "city": "Kopenhagen",
+          "country": "Dansk"
+        }
+      ],
+      "flights": [
+        {
+          "-flightNumber": "3V1000",
+          "departureLocation": "TXL",
+          "departureDate": "2017-12-20",
+          "departureTime": "15:00:00",
+          "destinationLocation": "LAX",
+          "destinationDate": "2017-12-21",
+          "destinationTime": "10:00:00",
+          "class": "Economy",
+          "isSecureFlight": "true"
+        },
+        {
+          "-flightNumber": "3H1001",
+          "departureLocation": "LAX",
+          "departureDate": "2017-12-21",
+          "departureTime": "11:00:00",
+          "destinationLocation": "OGG",
+          "destinationDate": "2017-12-21",
+          "destinationTime": "18:00:00",
+          "class": "First",
+          "isSecureFlight": "false"
+        }
+      ],
+      "price": [
+        {
+          "amount": "1300.0",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "-orderPerson": "Jane Doe",
+      "-bookingId": "12345-67890",
+      "passengers": [
+        {
+          "lastName": "Doe",
+          "firstName": "Jane",
+          "address": "Queen Lane 43b",
+          "postCode": "55567",
+          "city": "London",
+          "country": "England"
+        }
+      ],
+      "flights": [
+        {
+          "-flightNumber": "4P9999",
+          "departureLocation": "FRA",
+          "departureDate": "2018-04-01",
+          "departureTime": "11:11:11",
+          "destinationLocation": "NYC",
+          "destinationDate": "2018-04-01",
+          "destinationTime": "17:11:11",
+          "class": "First",
+          "isSecureFlight": "true"
+        }
+      ],
+      "price": [
+        {
+          "amount": "999",
+          "currency": "EUR"
+        }
+      ]
+    },
+    {
+      "-orderPerson": "Otto Waalkes",
+      "-bookingId": "67890-12345",
+      "passengers": [
+        {
+          "lastName": "Ottifant",
+          "firstName": "Der kleine",
+          "address": "Hauptstr.12",
+          "postCode": "44456",
+          "city": "Leer",
+          "country": "Ostfriesland"
+        }
+      ],
+      "flights": [
+        {
+          "-flightNumber": "4P4567",
+          "departureLocation": "HAM",
+          "departureDate": "2018-05-01",
+          "departureTime": "12:15:00",
+          "destinationLocation": "AGA",
+          "destinationDate": "2018-05-02",
+          "destinationTime": "17:15:00",
+          "class": "Business",
+          "isSecureFlight": "false"
+        }
+      ],
+      "price": [
+        {
+          "amount": "899.99",
+          "currency": "EUR"
+        }
+      ]
+    },
+    {
+      "-orderPerson": "Louis de Funès",
+      "-bookingId": "67890-33445",
+      "passengers": [
+        {
+          "lastName": "de Funès",
+          "firstName": "Louis",
+          "address": "Rue de Baguette 12",
+          "postCode": "44456",
+          "city": "Paris",
+          "country": "France"
+        }
+      ],
+      "flights": [
+        {
+          "-flightNumber": "4P4599",
+          "departureLocation": "ORY",
+          "departureDate": "2018-06-01",
+          "departureTime": "09:15:00",
+          "destinationLocation": "NRT",
+          "destinationDate": "2018-06-02",
+          "destinationTime": "18:15:00",
+          "class": "First",
+          "isSecureFlight": "false"
+        }
+      ],
+      "price": [
+        {
+          "amount": "1299.99",
+          "currency": "EUR"
+        }
+      ]
+    },
+    {
+      "-orderPerson": "Ephraim Kishon",
+      "-bookingId": "67890-33557",
+      "passengers": [
+        {
+          "lastName": "Kishon",
+          "firstName": "Ephraim",
+          "address": "Rothschild Boulevard 44",
+          "postCode": "1001",
+          "city": "Tel Aviv",
+          "country": "Israel"
+        }
+      ],
+      "flights": [
+        {
+          "-flightNumber": "LY0699",
+          "departureLocation": "TLV",
+          "departureDate": "2018-09-01",
+          "departureTime": "10:15:00",
+          "destinationLocation": "BUD",
+          "destinationDate": "2018-09-01",
+          "destinationTime": "13:50:00",
+          "class": "Business",
+          "isSecureFlight": "true"
+        }
+      ],
+      "price": [
+        {
+          "amount": "299.99",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}

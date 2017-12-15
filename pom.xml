@@ -9,11 +9,12 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>Task</module>
+        <module>Task1</module>
         <module>Task2</module>
-        <module>Task</module>
+        <module>Task5</module>
         <module>Task3</module>
         <module>Task4</module>
+        <module>Task5Mav</module>
     </modules>
 
 

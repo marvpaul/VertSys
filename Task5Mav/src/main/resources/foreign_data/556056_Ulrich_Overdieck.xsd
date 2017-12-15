@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="bookings" type="bookings"/>
+
+    <xs:complexType name="bookings">
+        <xs:sequence>
+            <xs:element name="booking" type="booking" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="orderIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{5}-[0-9]{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="locationType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="flightNumberType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z0-9]{2}[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="currencyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="GBP"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="classType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Economy"/>
+            <xs:enumeration value="Business"/>
+            <xs:enumeration value="First"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="personType">
+        <xs:sequence>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="address" type="xs:string"/>
+            <xs:element name="postCode" type="xs:positiveInteger"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="booking">
+        <xs:sequence>
+            <xs:element name="passengers" type="personType" maxOccurs="unbounded"/>
+
+            <xs:element name="flights" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="departureLocation" type="locationType"/>
+                        <xs:element name="departureDate" type="xs:date"/>
+                        <xs:element name="departureTime" type="xs:time"/>
+                        <xs:element name="destinationLocation" type="locationType"/>
+                        <xs:element name="destinationDate" type="xs:date"/>
+                        <xs:element name="destinationTime" type="xs:time"/>
+                        <xs:element name="class" type="classType"/>
+                        <xs:element name="isSecureFlight" type="xs:boolean"/>
+                    </xs:sequence>
+                    <xs:attribute name="flightNumber" type="flightNumberType" use="required"/>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="price">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="amount" type="xs:double"/>
+                        <xs:element name="currency" type="currencyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:sequence>
+
+        <xs:attribute name="orderPerson" type="xs:string" use="required"/>
+        <xs:attribute name="bookingId" type="orderIdType" use="required"/>
+
+    </xs:complexType>
+
+</xs:schema>
