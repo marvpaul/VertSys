@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 
+/*
+Generated from https://timboudreau.com/blog/json/read
+ */
 public final class BookingsJackson {
     public final Booking bookings[];
 
