@@ -1,0 +1,156 @@
+{
+  "bookings":[
+    {
+      "nr" : 123,
+      "flights" : [
+        {
+          "nr" : 1234,
+          "departure" : "Berlin SFX",
+          "destination" : "Berlin TXL",
+          "departure_date" : "1970-03-27",
+          "destination_date" : "1970-03-27",
+          "departure_time" : "20:30:10",
+          "destination_time" : "21:30:10",
+          "is_secure_flight" : true,
+          "passengers" : [
+            {
+            "name" : "Peter Lustig",
+            "adress" : "Steinweg 18",
+            "children" : 2
+            },
+            {
+              "name" : "Felix Lustig",
+              "adress" : "Steinweg 18",
+              "children" : 2
+            },
+           {
+              "name" : "Karl Lustig",
+              "adress" : "Steinweg 18",
+              "children" : 2
+            }
+          ]
+        }
+      ],
+      "price" : 40.0
+    },
+    {
+      "nr" : 124,
+      "flights" : [
+        {
+          "nr" : 1235,
+          "departure" : "Berlin SFX",
+          "destination" : "Berlin TXL",
+          "departure_date" : "1970-03-27",
+          "destination_date" : "1970-03-27",
+          "departure_time" : "20:30:10",
+          "destination_time" : "21:30:10",
+          "is_secure_flight" : true,
+          "passengers" : [
+            {
+              "name" : "Peter Lustig",
+              "adress" : "Steinweg 18",
+              "children" : 2
+            },
+            {
+              "name" : "Felix Lustig",
+              "adress" : "Steinweg 18",
+              "children" : 2
+            },
+            {
+              "name" : "Karl Lustig",
+              "adress" : "Steinweg 18",
+              "children" : 2
+            }
+          ]
+        },
+        {
+          "nr" : 1236,
+          "departure" : "Berlin SFX",
+          "destination" : "London STD",
+          "departure_date" : "1970-03-27",
+          "destination_date" : "1970-03-27",
+          "departure_time" : "20:30:10",
+          "destination_time" : "21:30:10",
+          "is_secure_flight" : false,
+          "passengers" : [
+            {
+              "name" : "Marie Green",
+              "adress" : "Elefantenweg 18",
+              "children" : 2
+            }
+          ]
+        }
+      ],
+      "price" : 1000.50
+    },
+    {
+      "nr" : 125,
+      "flights" : [
+        {
+          "nr" : 1240,
+          "departure" : "Berlin TXL",
+          "destination" : "Barcelona DHD",
+          "departure_date" : "1970-03-27",
+          "destination_date" : "1970-03-27",
+          "departure_time" : "20:30:10",
+          "destination_time" : "21:30:10",
+          "is_secure_flight" : true,
+          "passengers" : [
+            {
+              "name" : "Felix Eckerkt",
+              "adress" : "Steinweg 18",
+              "children" : 0
+            }
+          ]
+        }
+      ],
+      "price" : 440.0
+    },
+    {
+      "nr" : 126,
+      "flights" : [
+        {
+          "nr" : 1241,
+          "departure" : "Berlin TXL",
+          "destination" : "Reykjavik RKI",
+          "departure_date" : "1970-03-27",
+          "destination_date" : "1970-03-27",
+          "departure_time" : "20:30:10",
+          "destination_time" : "21:30:10",
+          "is_secure_flight" : true,
+          "passengers" : [
+            {
+              "name" : "Manuel Ewert",
+              "adress" : "Mauerplatz 18",
+              "children" : 10
+            }
+          ]
+        }
+      ],
+      "price" : 50.0
+    },
+    {
+      "nr" : 127,
+      "flights" : [
+        {
+          "nr" : 1242,
+          "departure" : "Berlin TXL",
+          "destination" : "Reykjavik RKI",
+          "departure_date" : "1970-03-27",
+          "destination_date" : "1970-03-27",
+          "departure_time" : "20:30:10",
+          "destination_time" : "21:30:10",
+          "is_secure_flight" : true,
+          "passengers" : [
+            {
+              "name" : "Manuel Mattew",
+              "adress" : "Mareinstraße 10",
+              "children" : 0
+            }
+          ]
+        }
+      ],
+      "price" : 156.0
+    }
+  ]
+}

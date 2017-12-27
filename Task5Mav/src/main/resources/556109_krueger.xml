@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="556109_krueger.xsd">
+    <booking booking_nr="123">
+        <flights>
+            <flight flight_nr="1234">
+                <departure>Berlin SFX</departure>
+                <destination>Berlin TXL</destination>
+                <departure_date>1970-03-27</departure_date>
+                <destination_date>1970-03-27</destination_date>
+                <departure_time>20:30:10</departure_time>
+                <destination_time>21:30:10</destination_time>
+                <is_secure_flight>true</is_secure_flight>
+                <passengers>
+                    <passenger name="Peter Lustig">
+                        <adress>Steinweg 18</adress>
+                        <children>2</children>
+                    </passenger>
+                    <passenger name="Felix Lustig">
+                        <adress>Steinweg 18</adress>
+                        <children>2</children>
+                    </passenger>
+                    <passenger name="Karl Lustig">
+                        <adress>Steinweg 18</adress>
+                        <children>2</children>
+                    </passenger>
+                </passengers>
+            </flight>
+        </flights>
+        <price>40.0</price>
+    </booking>
+    <booking booking_nr="124">
+        <flights>
+            <flight flight_nr="1235">
+                <departure>Berlin SFX</departure>
+                <destination>Berlin TXL</destination>
+                <departure_date>1970-03-27</departure_date>
+                <destination_date>1970-03-27</destination_date>
+                <departure_time>20:30:10</departure_time>
+                <destination_time>21:30:10</destination_time>
+                <is_secure_flight>true</is_secure_flight>
+                <passengers>
+                    <passenger name="Peter Lustig">
+                        <adress>Steinweg 18</adress>
+                        <children>2</children>
+                    </passenger>
+                </passengers>
+            </flight>
+            <flight flight_nr="1236">
+                <departure>Berlin TXL</departure>
+                <destination>London STD</destination>
+                <departure_date>1970-03-27</departure_date>
+                <destination_date>1970-03-27</destination_date>
+                <departure_time>20:30:10</departure_time>
+                <destination_time>21:30:10</destination_time>
+                <is_secure_flight>false</is_secure_flight>
+                <passengers>
+                    <passenger name="Marie Green">
+                        <adress>Elefantenweg 18</adress>
+                        <children>2</children>
+                    </passenger>
+                </passengers>
+            </flight>
+        </flights>
+        <price>1000.50</price>
+    </booking>
+    <booking booking_nr="125">
+        <flights>
+            <flight flight_nr="1240">
+                <departure>Berlin TXL</departure>
+                <destination>Barcelona DHD</destination>
+                <departure_date>1970-03-27</departure_date>
+                <destination_date>1970-03-27</destination_date>
+                <departure_time>20:30:10</departure_time>
+                <destination_time>21:30:10</destination_time>
+                <is_secure_flight>true</is_secure_flight>
+                <passengers>
+                    <passenger name="Felix Eckerkt">
+                        <adress>Steinweg 18</adress>
+                        <children>0</children>
+                    </passenger>
+                </passengers>
+            </flight>
+        </flights>
+        <price>440.0</price>
+    </booking>
+    <booking booking_nr="126">
+        <flights>
+            <flight flight_nr="1241">
+                <departure>Berlin TXL</departure>
+                <destination>Reykjavik RKI</destination>
+                <departure_date>1970-03-27</departure_date>
+                <destination_date>1970-03-27</destination_date>
+                <departure_time>20:30:10</departure_time>
+                <destination_time>21:30:10</destination_time>
+                <is_secure_flight>true</is_secure_flight>
+                <passengers>
+                    <passenger name="Manuel Ewert">
+                        <adress>Mauerplatz 18</adress>
+                        <children>10</children>
+                    </passenger>
+                </passengers>
+            </flight>
+        </flights>
+        <price>50.0</price>
+    </booking>
+    <booking booking_nr="127">
+        <flights>
+            <flight flight_nr="1242">
+                <departure>Berlin TXL</departure>
+                <destination>Reykjavik RKI</destination>
+                <departure_date>1970-03-27</departure_date>
+                <destination_date>1970-03-27</destination_date>
+                <departure_time>20:30:10</departure_time>
+                <destination_time>21:30:10</destination_time>
+                <is_secure_flight>true</is_secure_flight>
+                <passengers>
+                    <passenger name="Manuel Mattew">
+                        <adress>Mareinstraße 10</adress>
+                        <children>0</children>
+                    </passenger>
+                </passengers>
+            </flight>
+        </flights>
+        <price>156.0</price>
+    </booking>
+</bookings>
