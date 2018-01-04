@@ -82,7 +82,7 @@ public class Program {
                 }
                 break;
             case 2:
-                if(from -5 > 0){
+                if(from -5 >= 0){
                     printCoins(coins, from-5, to-5);
                 } else {
                     System.err.println("Beginning of data reached!");
