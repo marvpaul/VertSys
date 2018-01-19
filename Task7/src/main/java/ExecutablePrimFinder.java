@@ -4,6 +4,12 @@ public class ExecutablePrimFinder implements Callable<Boolean> {
 
     private int from, to, prim;
 
+    /**
+     * Constructor which takes some arguments to check if a certain number is a prim
+     * @param from check from from
+     * @param to check to to
+     * @param prim the number to check if it's a prim
+     */
     public ExecutablePrimFinder(int from, int to, int prim) {
         this.from = from;
         this.prim = prim;

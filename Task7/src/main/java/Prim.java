@@ -3,7 +3,13 @@ import java.util.concurrent.*;
 
 public class Prim {
 
-    public boolean isPrim(int prim, int tasksToSplitIn){
+    /**
+     * This method is for checking if a certain number is a prim number
+     * @param prim the certain number
+     * @param tasksToSplitIn
+     * @return
+     */
+    public static boolean isPrim(int prim, int tasksToSplitIn){
         //https://stackoverflow.com/questions/20221408/how-to-pass-a-parameter-to-a-thread-and-get-a-return-value
         ExecutorService executorService = Executors.newFixedThreadPool(tasksToSplitIn);
 

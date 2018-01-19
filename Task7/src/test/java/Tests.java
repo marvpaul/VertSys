@@ -1,4 +1,3 @@
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import static junit.framework.TestCase.assertFalse;
@@ -6,6 +5,10 @@ import static junit.framework.TestCase.assertTrue;
 
 public class Tests {
     Prim prim;
+
+    /**
+     * Some super awesome unit tests ^.^
+     */
 
     @Test
     public void testPrimTrue(){
